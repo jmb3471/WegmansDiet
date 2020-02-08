@@ -8,6 +8,8 @@ class foodObject:
         self.nutrition_facts = nutrition_facts
 
     def get_nut_specific(self,thing):
+        if (self.nutrition_facts == []):
+            return 0
         for x in self.nutrition_facts:
             if x['type'] == thing:
                 quantity = x['quantity']
