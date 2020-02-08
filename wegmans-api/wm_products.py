@@ -30,8 +30,7 @@ def get_locations(sku):
     return response.json()
 
 
-def search_products():
-    p_name = input("Enter product name: ")
+def search_products(p_name):
     text = "search?query=" + p_name + "&"
     response = requests.get(url + text + header[1:])
     check_status(response)
