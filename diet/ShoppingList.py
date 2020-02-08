@@ -57,7 +57,11 @@ class ShoppingList:
     #checks nutrition information of the shopping cart
     def check_nut(self):
         if self.zinc < (ZINC*self.time.value):
-            print("Not enough zinc for the week")
+            zinc_missing = (Zinc*self.time.value)-self.zinc
+            if self.time == TIME.Week:
+                print("You are missing "+str(zinc_missing)+"mg for a weekly intake")
+            else:
+                print("You are missing "+str(zinc_missing)+"mg for today's intake")
         else:
             print("You've gotten enough zinc")
         if self.potassium < (POTASSIUM*self.time.value):
