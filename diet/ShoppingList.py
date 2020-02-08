@@ -22,7 +22,7 @@ class ShoppingList:
         self.items = []
 
 
-    #Prints string list of items
+    #Prints string list of items s
     @override
     def toString(self):
         str = ""
