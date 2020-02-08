@@ -22,11 +22,14 @@ class ShoppingList:
         self.items = []
 
 
+    #Prints string list of items
     @override
     def toString(self):
         str = ""
         for x in self.items:
             str += x.toString()
+
+        str += "."
         return str
 
 
