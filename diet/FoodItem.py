@@ -10,6 +10,6 @@ class foodObject():
         if thing in self.nutrition_facts:
             return self.nutrition_facts[thing]
         else:
-            return "Does not contain "+ thing
+            return 0
 
 

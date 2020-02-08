@@ -3,6 +3,7 @@ Weekly dietary information on average based on FDA recommendations and Nutrition
 File: WeeklyValues.py
 @author Jonathan Baxley
 """
+import enum
 
 #Vitamins in milligrams
 ZINC = 15.00 * 7.00
@@ -21,4 +22,9 @@ TOT_CARBS = 283.33 * 7.00
 CHOLESTEROL = 333.33 * 7.00
 PROTEIN = 56.00 * 7.00
 DIETARY_FIBER = 20.00 * 7.00
+
+#SEX
+class SEX(enum.Enum):
+    Male = 0,
+    Female = 1
 
