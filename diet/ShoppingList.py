@@ -40,17 +40,17 @@ class ShoppingList:
             quantity -= 1
 
             self.items.append(item)
-            self.zinc += item.get_nut_specific("zinc")
-            self.potassium += item.get_nut_specific("potassium")
-            self.iron += item.get_nut_specific("iron")
-            self.sodium += item.get_nut_specific("sodium")
+            self.zinc += item.get_nut_specific("Zinc")
+            self.potassium += item.get_nut_specific("Potassium")
+            self.iron += item.get_nut_specific("Iron")
+            self.sodium += item.get_nut_specific("Sodium")
             self.calcium += item.get_nut_specific("Calcium")
-            self.calories += item.get_nut_specific("calories")
-            self.tot_fat += item.get_nut_specific("tot_fat")
-            self.tot_carbs += item.get_nut_specific("tot_carbs")
-            self.protein += item.get_nut_specific("protein")
-            self.dietary_fiber += item.get_nut_specific("dietary_fiber")
-            self.cholesterol += item.get_nut_specific("cholesterol")
+            self.calories += item.get_nut_specific("Calories")
+            self.tot_fat += item.get_nut_specific("Total Fat")
+            self.tot_carbs += item.get_nut_specific("Total Carbohydrate")
+            self.protein += item.get_nut_specific("Protein")
+            self.dietary_fiber += item.get_nut_specific("Dietary Fiber")
+            self.cholesterol += item.get_nut_specific("Cholesterol")
 
         self.check_nut()
 
@@ -61,6 +61,12 @@ class ShoppingList:
         potassium_amount = POTASSIUM*self.time.value
         iron_amount = IRON*self.time.value
         sodium_amount = SODIUM*self.time.value
+        calories_amount = CALORIES_FEMALE if self.sex.value else CALORIES_MALE
+        tot_fat_amount = TOT_FAT*self.time.value
+        tot_carb_amount = TOT_CARBS*self.time.value
+        protein_amount = PROTEIN*self.time.value
+        dietary_fiber_amount = DIETARY_FIBER*self.time.value
+        cholesteral_amount = CHOLESTEROL*self.time.value
         if self.zinc < (zinc_amount-zinc_amount*0.1):
             zinc_missing = zinc_amount-self.zinc
             if self.time == TIME.Week:
@@ -107,22 +113,47 @@ class ShoppingList:
             print("You've gotten enough iron")
         ####
         ####
-        if self.sodium < (SODIUM*self.time.value):
-            print("Not enough sodium for the week")
+        if self.sodium < (sodium_amount-sodium_amount*0.1):
+            sodium_missing = sodium_amount-self.sodium
+            if self.time == TIME.Week:
+                print("You are missing "+str(sodium_missing)+"mg for a weekly intake of sodium")
+            else:
+                print("You are missing "+str(sodium_missing)+"mg for a daily intake of sodium")
+        elif self.sodium > (sodium_amount-sodium_amount*0.1):
+            sodium_over = self.sodium - sodium_amount+sodium_amount*0.1
+            if self.time == TIME.Week:
+                print("You are over the recommended weekly intake of sodium by "+str(sodium_over)+"mg")
+            else:
+                print("You are over the recommended daily intake of sodium by "+str(sodium_over)+"mg")
         else:
             print("You've gotten enough sodium")
-        if (self.sex == SEX.Male):
-            if (self.calories < (CALORIES_MALE*self.time.value)):
-                print("Not enough calories")
+        if self.calories < (calories_amount-calories_amount*0.1):
+            calories_missing = calories_amount-self.calories
+            if self.time == TIME.Week:
+                print("You are missing "+str(calories_missing)+" calories for a weekly intake")
             else:
-                print("Enough Calories")
+                print("You are missing "+str(calories_missing)+" calories for a daily intake")
+        elif self.calories > (calories_amount+calories_amount*0.1):
+            calories_over = self.calories - calories_amount+calories_amount*0.1
+            if self.time == TIME.Week:
+                print("You are over "+str(calories_over)+" calories for a weekly intake")
+            else:
+                print("You are over "+str(calories_over)+" calories for a daily intake")
         else:
-            if (self.calories < (CALORIES_FEMALE*self.time.value)):
-                print("Not enough calories")
+            print("You've gotten enough calories")
+
+        if self.tot_fat < (tot_fat_amount-tot_fat_amount*0.1):
+            total_fat_missing = tot_fat_amount-self.tot_fat
+            if self.time == TIME.Week:
+                print("You are missing "+str(total_fat_missing)+"g for a weekly intake of total fats")
             else:
-                print("Enough Calories")
-        if self.tot_fat < (TOT_FAT*self.time.value):
-            print("Not enough fat for the week")
+                print("You are missing"+str(total_fat_missing)+"g for a daily intake of total fats")
+        elif self.tot_fat > (tot_fat_amount+tot_fat_amount*0.1):
+            total_fat_over = self.tot_fat - tot_fat_amount+tot_fat_amount*0.1
+            if self.time == TIME.Week:
+                print("You are over "+str(total_fat_over)+"g for a weekly intake of total fats")
+            else:
+                print("You are over "+str(total_fat_over)+"g for a daily intake of total fats")
         else:
             print("You've gotten enough fat")
         if self.tot_carbs < (TOT_CARBS*self.time.value):
