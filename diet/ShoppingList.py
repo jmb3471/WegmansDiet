@@ -3,7 +3,7 @@ Parses JSON FILE To add to each object that comes in to a shopping list object
 File: ShoppingList.py
 @authors: Jonathan Baxley
 """
-from WeeklyValues import *
+from diet.WeeklyValues import *
 
 
 class ShoppingList:
@@ -57,22 +57,56 @@ class ShoppingList:
 
     #checks nutrition information of the shopping cart
     def check_nut(self):
-        if self.zinc < (ZINC*self.time.value):
-            zinc_missing = (Zinc*self.time.value)-self.zinc
+        zinc_amount = ZINC*self.time.value
+        potassium_amount = POTASSIUM*self.time.value
+        iron_amount = IRON*self.time.value
+        sodium_amount = SODIUM*self.time.value
+        if self.zinc < (zinc_amount-zinc_amount*0.1):
+            zinc_missing = zinc_amount-self.zinc
             if self.time == TIME.Week:
-                print("You are missing "+str(zinc_missing)+"mg for a weekly intake")
+                print("You are missing "+str(zinc_missing)+"mg for a weekly intake of zinc")
             else:
-                print("You are missing "+str(zinc_missing)+"mg for today's intake")
+                print("You are missing "+str(zinc_missing)+"mg for today's intake of zinc")
+        elif self.zinc > (zinc_amount+zinc_amount*0.1):
+            zinc_over = self.zinc - zinc_amount+zinc_amount*0.1
+            if self.time == TIME.Week:
+                print("You are over the recommended weekly intake of zinc by "+str(zinc_over)+"mg")
+            else:
+                print("You are over the recommended daily intake of zinc by " +str(zinc_over)+"mg")
         else:
             print("You've gotten enough zinc")
-        if self.potassium < (POTASSIUM*self.time.value):
-            print("Not enough potassium for the week")
+
+        if self.potassium < (potassium_amount-potassium_amount*0.1):
+            potassium_missing = potassium_amount-self.potassium
+            if self.time == TIME.Week:
+                print("You are missing "+str(potassium_missing)+"mg for a weekly intake of potassium")
+            else:
+                print("You are missing "+str(potassium_missing)+"mg for a daily intake of potassium")
+        elif self.potassium > (potassium_amount+potassium_amount*0.1):
+            potassium_over = self.potassium - potassium_amount+potassium_amount*0.1
+            if self.time == TIME.Week:
+                print("You are over the recommended weekly intake of potassium by "+str(potassium_over)+"mg")
+            else:
+                print("You are over the recommended daily intake of potassium by "+str(potassium_over)+"mg")
         else:
             print("You've gotten enough potassium")
-        if self.iron < (IRON*self.time.value):
-            print("Not enough iron for the week")
+
+        if self.iron < (iron_amount-iron_amount*0.1):
+            iron_missing = iron_amount-self.iron
+            if self.time == TIME.Week:
+                print("You are missing "+str(iron_missing)+"mg for a weekly intake of iron")
+            else:
+                print("You are missing "+str(iron_missing)+"mg for a daily intake of iron")
+        elif self.iron > (iron_amount+iron_amount*0.1):
+            iron_over = self.iron - iron_amount+iron_amount*0.1
+            if self.time == TIME.Week:
+                print("You are over the recommended weekly intake of iron by "+str(iron_over)+"mg")
+            else:
+                print("You are over the recommended daily intake of iron by "+str(iron_over)+"mg")
         else:
             print("You've gotten enough iron")
+        ####
+        ####
         if self.sodium < (SODIUM*self.time.value):
             print("Not enough sodium for the week")
         else:
