@@ -4,7 +4,7 @@ File: WeeklyValues.py
 @author Jonathan Baxley
 """
 import enum
-
+Zinc_suggestions = []
 #Vitamins in milligrams
 ZINC = 15.00 * 7.00
 POTASSIUM = 3500.00 * 7.00
@@ -27,4 +27,10 @@ DIETARY_FIBER = 20.00 * 7.00
 class SEX(enum.Enum):
     Male = 0,
     Female = 1
+
+#amount of time
+class TIME(enum.Enum):
+    Week = 1.0
+    Day = 1/7
+
 
