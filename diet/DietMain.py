@@ -10,15 +10,18 @@ def main():
 	#store = wm_stores.get_stores()
 	#print(store)
 	shopping_list = ShoppingList(SEX.Male, TIME.Day)
-	json_file = wm_products.get_product(435178)
-	#print(json_file)
+	#json_file = wm_products.search_products("bread")
+	json_file = wm_products.get_product(391882)
+	print(json_file)
 	name = json_file['name']
 	price = wm_products.get_price(391882, 1)
 	price = price['price']
 	nutrition = json_file['nutrients']
 
+	print(nutrition)
+
 	example = foodObject(name, price, nutrition)
-	print(example.toString())
+	string = example.get_nut_specific("Calcium")
 	shopping_list.add_item(example, 2)
 
 
