@@ -1,5 +1,5 @@
 
-class foodObject():
+class foodObject:
     def __init__(self,name,cost,nutrition_facts,location):
         self.name = name
         #price per unit or pound.
@@ -14,5 +14,7 @@ class foodObject():
             return self.nutrition_facts[thing]
         else:
             return 0
+    def toString(self):
+        print(self.name + " costs $"+self.cost+" and is located in "+self.location)
 
 
