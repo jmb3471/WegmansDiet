@@ -23,7 +23,6 @@ class ShoppingList:
 
 
     #Prints string list of items s
-    @override
     def toString(self):
         str = ""
         for x in self.items:
