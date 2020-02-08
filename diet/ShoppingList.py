@@ -172,3 +172,7 @@ class ShoppingList:
             print("Not enough cholesterol for the week")
         else:
             print("You've gotten enough cholesterol")
+        if self.calcium < CALCIUM*self.time.value:
+            print("Not enough calcium")
+        else:
+            print("enough calcium")
