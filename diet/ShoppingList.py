@@ -6,8 +6,8 @@ File: ShoppingList.py
 
 
 class ShoppingList:
-    def __init__(self, gender):
-        self.gender = gender
+    def __init__(self, sex):
+        self.sex = sex
         self.zinc = 0
         self.potassium = 0
         self.iron = 0
@@ -20,6 +20,15 @@ class ShoppingList:
         self.dietary_fiber = 0
         self.cholesterol = 0
         self.items = []
+
+
+    @override
+    def toString(self):
+        str = ""
+        for x in self.items:
+            str += x.toString()
+        return str
+
 
 
     #adds an item to the shopping list and all of its nutritional values
@@ -41,3 +50,50 @@ class ShoppingList:
             self.cholesterol += item.get_nut_specific("cholesterol")
 
 
+    def check_nut(self):
+        if self.zinc < ZINC:
+            print("Not enough zinc for the week")
+        else:
+            print("You've gotten enough zinc")
+        if self.potassium < POTASSIUM:
+            print("Not enough potassium for the week")
+        else:
+            print("You've gotten enough potassium")
+        if self.iron < IRON:
+            print("Not enough iron for the week")
+        else:
+            print("You've gotten enough iron")
+        if self.sodium < SODIUM:
+            print("Not enough sodium for the week")
+        else:
+            print("You've gotten enough sodium")
+        if (self.sex == SEX.Male):
+            if (self.calories < CALORIES_MALE):
+                print("Not enough calories")
+            else:
+                print("Enough Calories")
+        else:
+            if (self.calories < CALORIES_FEMALE):
+                print("Not enough calories")
+            else:
+                print("Enough Calories")
+        if self.tot_fat < TOT_FAT:
+            print("Not enough fat for the week")
+        else:
+            print("You've gotten enough fat")
+        if self.tot_carbs < TOT_CARBS:
+            print("Not enough carbs for the week")
+        else:
+            print("You've gotten enough carbs")
+        if self.protein < PROTEIN:
+            print("Not enough protein for the week")
+        else:
+            print("You've gotten enough protein")
+        if self.dietary_fiber < DIETARY_FIBER:
+            print("Not enough fiber for the week")
+        else:
+            print("You've gotten enough fiber")
+        if self.cholesterol < CHOLESTEROL:
+            print("Not enough cholesterol for the week")
+        else:
+            print("You've gotten enough cholesterol")
