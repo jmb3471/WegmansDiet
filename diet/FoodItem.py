@@ -15,6 +15,6 @@ class foodObject:
         else:
             return 0
     def toString(self):
-        return(self.name + " costs $"+self.cost+" and is located in "+self.location)
+        return(self.name + " costs $"+ str(self.cost)+" and is located in "+self.location)
 
 
