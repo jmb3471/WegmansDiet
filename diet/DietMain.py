@@ -6,7 +6,6 @@ import json
 from diet.FoodItem import foodObject
 from diet.ShoppingList import ShoppingList
 
-#resadfs
 def main():
 	#store = wm_stores.get_stores()
 	#print(store)
@@ -21,7 +20,6 @@ def main():
 	example = foodObject(name, price, nutrition)
 	print(example.toString())
 	shopping_list.add_item(example, 2)
-
 
 
 if __name__ == '__main__':
