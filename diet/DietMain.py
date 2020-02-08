@@ -12,6 +12,9 @@ def main():
 	shopping_list = ShoppingList(SEX.Male, TIME.Day)
 	json_file = wm_products.search_products("yogurt")
 	json_file = wm_products.get_product(366382)
+	string = "10 mg"
+	print(string.split(" "))
+	print(json_file)
 	name = json_file['name']
 	price = wm_products.get_price(391882, 1)
 	price = price['price']
@@ -19,7 +22,6 @@ def main():
 
 
 	example = foodObject(name, price, nutrition)
-	string = example.get_nut_specific("Calories")
 	shopping_list.add_item(example, 2)
 
 	print(shopping_list.calories)
