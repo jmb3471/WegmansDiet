@@ -29,17 +29,16 @@ class ShoppingList():
             quantity -= 1
 
             self.items.append(item)
-            self.zinc += get_nut_specific(item, "zinc")
-            self.potassium += get_nut_specific(item, "potassium")
-            self.iron += get_nut_specific(item, "iron")
-            self.sodium += get_nut_specific(item, "sodium")
-            self.calcium += get_nut_specific(item, "calcium")
-            self.calories += get_nut_specific(item, "calories")
-            self.tot_fat += get_nut_specific(item, "tot_fat")
-            self.tot_carbs += get_nut_specific(item, "tot_carbs")
-            self.protein += get_nut_specific(item, "protein")
-            self.dietary_fiber += get_nut_specific(item, "dietary_fiber")
-            self.cholesterol += get_nut_specific(item, "cholesterol")
+            self.zinc += item.get_nut_specific("zinc")
+            self.potassium += item.get_nut_specific("potassium")
+            self.iron += item.get_nut_specific("iron")
+            self.sodium += item.get_nut_specific("sodium")
+            self.calcium += item.get_nut_specific("calcium")
+            self.calories += item.get_nut_specific("calories")
+            self.tot_fat += item.get_nut_specific("tot_fat")
+            self.tot_carbs += item.get_nut_specific("tot_carbs")
+            self.protein += item.get_nut_specific("protein")
+            self.dietary_fiber += item.get_nut_specific("dietary_fiber")
+            self.cholesterol += item.get_nut_specific("cholesterol")
 
-        return
 
