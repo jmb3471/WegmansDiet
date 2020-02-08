@@ -5,6 +5,7 @@ File: ShoppingList.py
 """
 from WeeklyValues import *
 
+
 class ShoppingList:
     def __init__(self, sex):
         self.sex = sex
@@ -28,7 +29,7 @@ class ShoppingList:
         for x in self.items:
             str += x.toString()
 
-        str += "."
+        str += ". "
         return str
 
 
