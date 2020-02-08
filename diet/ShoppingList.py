@@ -45,7 +45,7 @@ class ShoppingList:
             self.iron += item.get_nut_specific("iron")
             self.sodium += item.get_nut_specific("sodium")
             self.calcium += item.get_nut_specific("Calcium")
-            self.calories += item.get_nut_specific("Calories")
+            self.calories += item.get_nut_specific("calories")
             self.tot_fat += item.get_nut_specific("tot_fat")
             self.tot_carbs += item.get_nut_specific("tot_carbs")
             self.protein += item.get_nut_specific("protein")
