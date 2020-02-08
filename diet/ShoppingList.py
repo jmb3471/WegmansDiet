@@ -3,10 +3,9 @@ Parses JSON FILE To add to each object that comes in to a shopping list object
 File: ShoppingList.py
 @authors: Jonathan Baxley
 """
-import FoodItem.py
 
 
-class ShoppingList():
+class ShoppingList:
     def __init__(self, gender):
         self.gender = gender
         self.zinc = 0
