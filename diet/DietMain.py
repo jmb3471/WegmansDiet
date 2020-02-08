@@ -6,7 +6,7 @@ import json
 from diet.FoodItem import foodObject
 from diet.ShoppingList import ShoppingList
 
-
+#resadfs
 def main():
 	#store = wm_stores.get_stores()
 	#print(store)
