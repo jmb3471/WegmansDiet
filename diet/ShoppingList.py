@@ -33,7 +33,6 @@ class ShoppingList:
         return str
 
 
-
     #adds an item to the shopping list and all of its nutritional values
     def add_item(self, item, quantity):
         while (quantity > 0):
@@ -52,7 +51,10 @@ class ShoppingList:
             self.dietary_fiber += item.get_nut_specific("dietary_fiber")
             self.cholesterol += item.get_nut_specific("cholesterol")
 
+        self.check_nut()
 
+
+    #checks nutrition information of the shopping cart
     def check_nut(self):
         if self.zinc < ZINC:
             print("Not enough zinc for the week")
