@@ -7,8 +7,9 @@ from WeeklyValues import *
 
 
 class ShoppingList:
-    def __init__(self, sex):
+    def __init__(self, sex,time):
         self.sex = sex
+        self.time = time
         self.zinc = 0
         self.potassium = 0
         self.iron = 0
@@ -56,49 +57,49 @@ class ShoppingList:
 
     #checks nutrition information of the shopping cart
     def check_nut(self):
-        if self.zinc < ZINC:
+        if self.zinc < (ZINC*self.time.value):
             print("Not enough zinc for the week")
         else:
             print("You've gotten enough zinc")
-        if self.potassium < POTASSIUM:
+        if self.potassium < (POTASSIUM*self.time.value):
             print("Not enough potassium for the week")
         else:
             print("You've gotten enough potassium")
-        if self.iron < IRON:
+        if self.iron < (IRON*self.time.value):
             print("Not enough iron for the week")
         else:
             print("You've gotten enough iron")
-        if self.sodium < SODIUM:
+        if self.sodium < (SODIUM*self.time.value):
             print("Not enough sodium for the week")
         else:
             print("You've gotten enough sodium")
         if (self.sex == SEX.Male):
-            if (self.calories < CALORIES_MALE):
+            if (self.calories < (CALORIES_MALE*self.time.value)):
                 print("Not enough calories")
             else:
                 print("Enough Calories")
         else:
-            if (self.calories < CALORIES_FEMALE):
+            if (self.calories < (CALORIES_FEMALE*self.time.value)):
                 print("Not enough calories")
             else:
                 print("Enough Calories")
-        if self.tot_fat < TOT_FAT:
+        if self.tot_fat < (TOT_FAT*self.time.value):
             print("Not enough fat for the week")
         else:
             print("You've gotten enough fat")
-        if self.tot_carbs < TOT_CARBS:
+        if self.tot_carbs < (TOT_CARBS*self.time.value):
             print("Not enough carbs for the week")
         else:
             print("You've gotten enough carbs")
-        if self.protein < PROTEIN:
+        if self.protein < (PROTEIN*self.time.value):
             print("Not enough protein for the week")
         else:
             print("You've gotten enough protein")
-        if self.dietary_fiber < DIETARY_FIBER:
+        if self.dietary_fiber < (DIETARY_FIBER*self.time.value):
             print("Not enough fiber for the week")
         else:
             print("You've gotten enough fiber")
-        if self.cholesterol < CHOLESTEROL:
+        if self.cholesterol < (CHOLESTEROL*self.time.value):
             print("Not enough cholesterol for the week")
         else:
             print("You've gotten enough cholesterol")
