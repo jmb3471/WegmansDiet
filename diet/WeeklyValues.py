@@ -28,3 +28,9 @@ class SEX(enum.Enum):
     Male = 0,
     Female = 1
 
+#amount of time
+class TIME(enum.Enum):
+    Week = 1.0
+    Day = 1/7
+
+
