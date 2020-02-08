@@ -60,6 +60,7 @@ class ShoppingList:
         zinc_amount = ZINC*self.time.value
         potassium_amount = POTASSIUM*self.time.value
         iron_amount = IRON*self.time.value
+        sodium_amount = SODIUM*self.time.value
         if self.zinc < (zinc_amount-zinc_amount*0.1):
             zinc_missing = zinc_amount-self.zinc
             if self.time == TIME.Week:
@@ -104,6 +105,8 @@ class ShoppingList:
                 print("You are over the recommended daily intake of iron by "+str(iron_over)+"mg")
         else:
             print("You've gotten enough iron")
+        ####
+        ####
         if self.sodium < (SODIUM*self.time.value):
             print("Not enough sodium for the week")
         else:
