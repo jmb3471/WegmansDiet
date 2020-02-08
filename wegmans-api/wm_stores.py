@@ -17,10 +17,12 @@ from check_status import check_status
 header = '?api-version=2018-10-18&Subscription-Key=' + API_KEY
 url = 'https://api.wegmans.io/stores/'
 
+
 def get_store(number):
     response = requests.get(url + str(number) + header)
     check_status(response)
     return response.json()
+
 
 def get_stores():
     response = requests.get(url + header)

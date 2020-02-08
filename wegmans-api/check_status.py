@@ -1,3 +1,9 @@
+"""
+Wegmans Products API error checker
+Written at Brickhack 2020
+author: Joshua Yoder <jpfyoder>
+author: Dhaval Shrishrimal
+"""
 import requests
 
 
