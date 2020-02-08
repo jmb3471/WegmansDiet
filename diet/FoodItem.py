@@ -7,22 +7,23 @@ class foodObject:
         #nutrition facts are a key:value pair, with string:value
         self.nutrition_facts = nutrition_facts
 
-    def get_nut_specific(self,thing):
+    def get_nut_specific(self, thing):
         if (self.nutrition_facts == []):
             return 0
         for x in self.nutrition_facts:
             if x['type'] == thing:
-                quantity = x['quantity']
-                dailypercent = x['dailyValuePercent']
+                quantity = self.nutrition_facts[1]['quantity']
                 if quantity != '' and quantity != 'None':
                     try:
                         return float(quantity)
                     except:
                         return 0
                 else:
+                    print("wrong")
                     return 0
-            else:
-                return 0
+        else:
+            return 0
+
 
     def toString(self):
         return(self.name + " costs $"+ str(self.cost) + " ")
