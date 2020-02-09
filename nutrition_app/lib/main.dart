@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart';
 
 void main() => runApp(MyApp());
 
@@ -95,17 +96,49 @@ class ShoppingListItem extends State<ShoppingList>{
       isedit = !isedit;
     });
   }
+
+  TextEditingController searchCon = new TextEditingController();
+
+  void sendSearch(search) async{
+    String url = "http://127.0.0.1:5000/sendDataToBack";
+    String json = '{"action" : "search", "name" : ' + search + '}';
+    Response response = await post(url, body: json);
+    int status_code = response.statusCode;
+  }
+
+  void buttonPushed(){
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (BuildContext context){
+          return Scaffold(
+            appBar: AppBar(
+              title: TextField(controller: searchCon,
+              keyboardType: TextInputType.text,
+              decoration: InputDecoration(hintText: 'Search'),
+              ),
+            ), floatingActionButton: FloatingActionButton(onPressed: () {
+              String search = searchCon.text;
+              searchCon.clear();
+              sendSearch(search);
+            },
+            child: Icon(Icons.search),),
+          );
+        })
+    );
+  }
   
   @override
   Widget build(BuildContext context){
     return Scaffold(
     appBar: AppBar(
       title: Text(titleVal),
-      actions: <Widget>[      // Add 3 lines from here...
+      actions: <Widget>[      
           IconButton(icon: Icon(Icons.create), onPressed: convertMode),
         ],  
       ),
     body: _buildList(),
+    floatingActionButton: FloatingActionButton(onPressed: buttonPushed,
+      child: Icon(Icons.plus_one)),
     );
   }
 }
@@ -233,7 +266,7 @@ class RadioGroupWidget extends State {
               controller: weightController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                hintText: 'pounds'
+                hintText: ' Pounds'
               )
             ),
           ),
@@ -335,13 +368,3 @@ setHumanSex(String string) async {
   SharedPreferences pref = await SharedPreferences.getInstance();
   await pref.setString("sex", string);
 }
-
-_makePostRequest() async {
-  // set up POST request arguments
-  String url = 'http://127.0.0.1:5000';
-  Map<String, String> headers = {"Content-type": "application/json"};
-  String json = '{"title": "Hello", "body": "body text", "userId": 1}';
-  // make POST request
-  Response response = await post(url, headers: headers, body: json);
-  // check the status code for the result
-  int statusCode = response.statusCode;
