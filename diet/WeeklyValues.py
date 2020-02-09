@@ -30,7 +30,6 @@ class SEX(enum.Enum):
     Male = 0,
     Female = 1,
     Prefer_not = 2
-
 #amount of time
 class TIME(enum.Enum):
     Week = 1.0
