@@ -1,5 +1,6 @@
 # authorization keys
 wegmans-api/auth.py
+wegmans_api/auth.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
