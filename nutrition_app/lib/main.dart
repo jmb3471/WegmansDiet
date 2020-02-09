@@ -28,19 +28,105 @@ class MyApp extends StatelessWidget {
   }
 }
 
+class ShoppingListItem extends State<ShoppingList>{
+  final _font = const TextStyle(fontSize: 18.0);
+  bool isedit = false;
+  String titleVal = " Your Grocery List";
+  var toRemove = new Set();
+  var _items = ['1', '2', '3', '5'];
+
+  Widget _buildRow(String str){
+    bool inRemove = toRemove.contains(str);
+    return ListTile(
+      title: Text(
+        str,
+        style: _font,
+      ),
+      trailing: Icon(
+        (isedit && inRemove) ? Icons.remove_circle : Icons.remove_circle,
+        color: isedit ? (inRemove ? Colors.red : null) : Colors.white,
+      ),
+      onTap: (){
+        if (isedit){
+          setState(() {
+            if(inRemove){
+              toRemove.remove(str);
+            } else {
+              toRemove.add(str);
+            }
+          });
+        }
+      },
+    );
+  }
+
+  Widget _buildList(){
+    return ListView.builder(padding: const EdgeInsets.all(16.0),
+      
+      itemCount: 2 * _items.length,
+      itemBuilder: (context, i) {
+        if (i.isOdd) return Divider();
+
+        final index = i ~/ 2;
+        return _buildRow(_items[index]);
+      });
+  }
+
+  void removeItems(){
+    int i = 0;
+    while (i < _items.length){
+      if (toRemove.contains(_items[i])){
+        toRemove.remove(_items[i]);
+        _items.remove(_items[i]);
+      } else {
+        i++;
+      }
+    }
+  }
+
+  void convertMode(){
+    setState(() {
+      if (isedit) {
+        titleVal = ' Your Grocery List';
+        removeItems();
+      } else {
+        titleVal = ' Remove Items';
+      }
+      isedit = !isedit;
+    });
+  }
+  
+  @override
+  Widget build(BuildContext context){
+    return Scaffold(
+    appBar: AppBar(
+      title: Text(titleVal),
+      actions: <Widget>[      // Add 3 lines from here...
+          IconButton(icon: Icon(Icons.create), onPressed: convertMode),
+        ],  
+      ),
+    body: _buildList(),
+    );
+  }
+}
+
+class ShoppingList extends StatefulWidget{
+
+  ShoppingListItem createState() => ShoppingListItem();
+  
+}
+
 /*
  * HOME PAGE CODE
  * BELOW THIS COMMENT
  */
 
 class HomePage extends StatelessWidget{
-  @override
+ @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: getThemeData(),
-      home: Scaffold(
-        appBar: AppBar(title: const Text("Dhaval")),
-      ),
+      title: ' Your Grocery List',
+      home: ShoppingList(),
     );
   }
 }
@@ -56,7 +142,7 @@ class LandingPage extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-        title: Text("Flutter Radio Button Group Example"),
+        title: Text(" Details"),
         ),
         body: SafeArea(
           child : Center(
@@ -117,7 +203,7 @@ class RadioGroupWidget extends State {
           ),
           Container(
             child: Container(
-              height: 250.0,
+              height: 170.0,
               child: Column(
                 children: 
                   gList.map((data) => RadioListTile(
@@ -152,7 +238,7 @@ class RadioGroupWidget extends State {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(100.0),
+            padding: EdgeInsets.all(40.0),
           ),
           ButtonTheme(
             minWidth: 200.0,
