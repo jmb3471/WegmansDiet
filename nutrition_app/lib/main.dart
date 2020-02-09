@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,10 +17,10 @@ class MyApp extends StatelessWidget {
         future: checkLoginValue(),
         builder: (BuildContext context, AsyncSnapshot<bool> snapshot){
           print(snapshot.data);
-          if (snapshot.data != true) {
-            return LandingPage();
-          } else {
+          if (snapshot.data == true) {
             return HomePage();
+          } else {
+            return LandingPage();
           }
         }
       )
@@ -81,7 +82,7 @@ class GenderList {
 class RadioGroupWidget extends State {
 
   // Default Radio Button Item
-  String radioItem = 'Mango';
+  String radioItem = 'Male';
 
   // Group Value for Radio Button.
   int id = 1;
@@ -146,7 +147,7 @@ class RadioGroupWidget extends State {
               controller: weightController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                hintText: 'Weight'
+                hintText: 'pounds'
               )
             ),
           ),
@@ -161,9 +162,12 @@ class RadioGroupWidget extends State {
               color: Colors.blue,
               onPressed: () {
                 if(!isNumeric(weightController.text)) {
-                  
+                  _ackAlert(context);
                 } else {
-
+                  setHumanSex(radioItem);
+                  setHumanWeight(double.parse(weightController.text));
+                  setLoginValue();
+                  navigateToHomePage(context);
                 }
               },
               child: const Text(
@@ -191,7 +195,28 @@ bool isNumeric(String s) {
 }
 
 Future<void> _ackAlert(BuildContext context) {
-  return showDialog<void>
+  return showDialog<void>(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Error'),
+        content: const Text('Please enter a correct weight value'),
+        actions: <Widget>[
+          FlatButton(
+            child: Text('OK'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            })
+        ],
+      );
+    }
+  );
+}
+
+//Navigate to HomePage
+Future navigateToHomePage(context) async {
+  Navigator.push(context,
+    MaterialPageRoute(builder: (context) => HomePage()));
 }
 
 //Get Common Theme Data
@@ -208,7 +233,7 @@ Future<bool> checkLoginValue () async {
 }
 
 //Set value that user has logged in
-_setLoginValue() async {
+setLoginValue() async {
   SharedPreferences loginCheck = await SharedPreferences.getInstance();
   await loginCheck.setBool("login", true);
 }
