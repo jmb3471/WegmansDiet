@@ -20,8 +20,7 @@ Work in progress ...
 """
 def main():
 	while (True):
-		inp = input("Press r to remove item, a to add item, s to search for an item,"
-			" p to print shopping cart, n for nutritional details: ")
+		inp = input("Enter a command (Press H for help):")
 		if inp == 'r':
 			print(SHOPPING_LIST.toList())
 			inp = input("Which sku would you like to remove:")
@@ -55,6 +54,14 @@ def main():
 			print(lst)
 		elif inp == 'n':
 			SHOPPING_LIST.check_nut()
+		elif inp == 'h':
+			print("Press r to remove item.")
+			print("Press a to add an item.")
+			print("Press s to search for an item.")
+			print("Press p to print your shopping cart.")
+			print("Press n for nutritional details and suggestions.")
+			print("Press h for help.")
+
 
 
 """
