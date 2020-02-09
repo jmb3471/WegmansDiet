@@ -17,6 +17,6 @@ def parse(list):
                 'sku':sku
             }
         except (Exception):
-            print(sku)
+            print()
     return new_dict
 
