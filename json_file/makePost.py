@@ -5,3 +5,4 @@ def sendPost(json):
     print ('debug response from server: ' + res.text)
 
 sendPost({'name':'robby','cost':'1'})
+
