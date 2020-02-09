@@ -289,5 +289,10 @@ def remove_item(item, quantity):
 
 def send_suggestion(values, vitamin):
     #change later
-    print(values, "suggested for low " + vitamin)
+    string = ""
+    for x in values:
+        product = wm_products.get_product(x)
+        name = product['name']
+        string += name + ": SKU" + str(x) + ", "
+    print(string, "suggested for low " + vitamin)
 

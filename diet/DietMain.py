@@ -21,7 +21,7 @@ Work in progress ...
 def main():
 	while (True):
 		inp = input("Press r to remove item, a to add item, s to search for an item,"
-					" p to print shopping cart, n for nutritional details: ")
+			" p to print shopping cart, n for nutritional details: ")
 		if inp == 'r':
 			print(SHOPPING_LIST.toList())
 			inp = input("Which sku would you like to remove:")
@@ -29,9 +29,7 @@ def main():
 			for x in lst:
 				if x == inp:
 					remove_item(SHOPPING_LIST.return_item(x), 1)
-					break
 			print("Item not in cart")
-
 		elif inp == 's':
 			inp = input("Search for an Item: ")
 			products = wm_products.search_products(inp)
@@ -42,9 +40,7 @@ def main():
 				lst.append(x['sku'])
 			print(lst)
 		elif inp == 'a':
-
 			inp = input("Pick a SKU: ")
-
 			json_file = wm_products.get_product(inp)
 			name = json_file['name']
 			price = wm_products.get_price(inp, 1)
@@ -56,7 +52,6 @@ def main():
 			lst = []
 			for x in SHOPPING_LIST.toList():
 				lst.append(SHOPPING_LIST.return_item(x).toString())
-
 			print(lst)
 		elif inp == 'n':
 			SHOPPING_LIST.check_nut()
