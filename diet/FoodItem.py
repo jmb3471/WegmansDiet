@@ -13,9 +13,13 @@ class foodObject:
         for x in self.nutrition_facts:
             if x['type'] == thing:
                 quantity = self.nutrition_facts[1]['quantity']
+                quantity_split = quantity.split(" ")
+                if (len(quantity_split) > 1):
+                    if (quantity_split[1] == 'mg'):
+                        quantity_split[0] = quantity_split[0]/1000
                 if quantity != '' and quantity != 'None':
                     try:
-                        return float(quantity)
+                        return float(quantity_split[0])
                     except:
                         return 0
                 else:
