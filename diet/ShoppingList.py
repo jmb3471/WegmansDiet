@@ -4,7 +4,8 @@ File: ShoppingList.py
 @authors: Jonathan Baxley, Ezequiel Salas
 """
 from diet.WeeklyValues import *
-
+import json
+from diet.Suggest_Food import *
 
 """
 Takes information and sorts dietary info into a shopping list
@@ -12,7 +13,7 @@ Default Constructor: takes sex and time as input, both enums in WeeklyValues.py
 @author: Jonathan Baxley
 """
 class ShoppingList:
-    def __init__(self, sex,time):
+    def __init__(self, sex, time):
         self.sex = sex
         self.time = time
         self.zinc = 0
@@ -60,9 +61,11 @@ class ShoppingList:
         if self.zinc < (zinc_amount-zinc_amount*0.1):
             #zinc needed to match the recommended amount
             zinc_missing = zinc_amount-self.zinc
+            send_suggestion(low_Zinc, "Zinc")
             #to check if it's for weekly or daily
             if self.time == TIME.Week:
                 print("You are missing "+str(zinc_missing)+"mg for a weekly intake of zinc")
+
             else:
                 print("You are missing "+str(zinc_missing)+"mg for a daily intake of zinc")
         #check to see if the zinc in the shopping cart is greater than
@@ -80,6 +83,8 @@ class ShoppingList:
 
         if self.iron < (iron_amount-iron_amount*0.1):
             iron_missing = iron_amount-self.iron
+            send_suggestion(low_Iron, "Iron")
+
             if self.time == TIME.Week:
                 print("You are missing "+str(iron_missing)+"mg for a weekly intake of iron")
             else:
@@ -96,6 +101,8 @@ class ShoppingList:
         ####
         if self.sodium < (sodium_amount-sodium_amount*0.1):
             sodium_missing = sodium_amount-self.sodium
+            send_suggestion(low_Sodium, "Sodium")
+
             if self.time == TIME.Week:
                 print("You are missing "+str(sodium_missing)+"mg for a weekly intake of sodium")
             else:
@@ -139,6 +146,8 @@ class ShoppingList:
             print("You've gotten enough total fat")
         if self.tot_carbs < (tot_carb_amount-tot_carb_amount*0.1):
             total_carb_missing = tot_carb_amount-self.tot_carbs
+            send_suggestion(low_Carb, "Total Carbohydrate")
+
             if self.time == TIME.Week:
                 print("You are missing "+str(total_carb_missing)+"mg for a weekly intake of total carbs")
             else:
@@ -155,6 +164,8 @@ class ShoppingList:
 
         if self.protein < (protein_amount-protein_amount*0.1):
             protein_missing = protein_amount-self.protein
+            send_suggestion(low_Protein, "Protein")
+
             if self.time == TIME.Week:
                 print("You are missing "+str(protein_missing)+"mg for a weekly intake of protein")
             else:
@@ -170,6 +181,8 @@ class ShoppingList:
 
         if self.dietary_fiber < (dietary_fiber_amount-dietary_fiber_amount*0.1):
             dietary_fiber_missing = dietary_fiber_amount-self.dietary_fiber
+            send_suggestion(low_Fiber, "Dietary Fiber")
+
             if self.time == TIME.Week:
                 print("You are missing "+str(dietary_fiber_missing)+"mg for a weekly intake of dietary fiber")
             else:
@@ -183,9 +196,10 @@ class ShoppingList:
         else:
             print("You've gotten enough fiber")
 
-
         if self.cholesterol < (cholesteral_amount-cholesteral_amount*0.1):
             cholesteral_missing = cholesteral_amount-self.cholesterol
+            send_suggestion(low_Cholesterol, "Cholesterol")
+
             if self.time == TIME.Week:
                 print("You are missing "+str(cholesteral_missing)+"mg for a weekly intake of cholesteral")
             else:
@@ -201,6 +215,8 @@ class ShoppingList:
 
         if self.calcium < (calories_amount-calories_amount*0.1):
             calcium_missing = calcium_amount-self.calcium
+            send_suggestion(low_Calcium, "Calcium")
+
             if self.time == TIME.Week:
                 print ("You are missing "+str(calcium_missing)+" mg for a weekly intake of calcium")
             else:
@@ -264,3 +280,12 @@ def remove_item(item, quantity):
         SHOPPING_LIST.items.remove(item)
 
     SHOPPING_LIST.check_nut()
+
+def send_suggestion(values, vitamin):
+    data = {}
+    data['Action'] = "Suggestion"
+    data['type'] = vitamin
+    data['list'] = values
+
+    with open('data.json', 'w') as outfile:
+        json.dump(data, outfile)

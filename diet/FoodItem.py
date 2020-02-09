@@ -46,7 +46,6 @@ class foodObject:
         else:
             return 0
 
-
     def toString(self):
         """
         :return: name,cost

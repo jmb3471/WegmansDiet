@@ -58,7 +58,6 @@ def sendToJson(shopping_list):
 		'Sex': shopping_list.sex.value,
 		'Time': shopping_list.time.value,
 		'Items': shopping_list.toList()
-
 	})
 
 	with open('data.json', 'w') as outfile:
