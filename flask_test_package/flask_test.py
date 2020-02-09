@@ -35,7 +35,7 @@ def sendDatatoBack():
         remove_item(foodObjectThing,1)
         print('We Gucci if this appears')
         return jsonify(data['object'])
-    else:
+    elif type == 'add':
         foodObjectThing = data['object']
         sku = foodObjectThing['sku']
         actualObject = wm_products.get_product(sku)
@@ -47,6 +47,10 @@ def sendDatatoBack():
         add_item(foodObjectThing,1)
         print('We Gucci if this appears')
         return jsonify(data['object'])
+    elif type == 'search':
+        name = data['name']
+        jsonfile = wm_products.search_products(name)
+        return jsonfile
 
 if __name__ == '__main__':
     app.run()
