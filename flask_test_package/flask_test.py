@@ -5,7 +5,6 @@ from diet.ShoppingList import *
 from diet.parseSearch import *
 app = Flask(__name__)
 
-#test
 @app.route('/processjson',methods=['POST'])
 def processjson():
     data = request.get_json()

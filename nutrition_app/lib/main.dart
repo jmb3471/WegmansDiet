@@ -34,6 +34,7 @@ class ShoppingListItem extends State<ShoppingList>{
   String titleVal = " Your Grocery List";
   var toRemove = new Set();
   var _items = ['1', '2', '3', '5'];
+  String search = '';
 
   Widget _buildRow(String str){
     bool inRemove = toRemove.contains(str);
@@ -95,17 +96,40 @@ class ShoppingListItem extends State<ShoppingList>{
       isedit = !isedit;
     });
   }
+
+  TextEditingController searchCon = new TextEditingController();
+
+  void buttonPushed(){
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (BuildContext context){
+          return Scaffold(
+            appBar: AppBar(
+              title: TextField(controller: searchCon,
+              keyboardType: TextInputType.text,
+              decoration: InputDecoration(hintText: 'Search'),
+              ),
+            ), floatingActionButton: FloatingActionButton(onPressed: () {
+              search = searchCon.text;
+              searchCon.clear();
+            }),
+          );
+        })
+    );
+  }
   
   @override
   Widget build(BuildContext context){
     return Scaffold(
     appBar: AppBar(
       title: Text(titleVal),
-      actions: <Widget>[      // Add 3 lines from here...
+      actions: <Widget>[      
           IconButton(icon: Icon(Icons.create), onPressed: convertMode),
         ],  
       ),
     body: _buildList(),
+    floatingActionButton: FloatingActionButton(onPressed: buttonPushed,
+      child: Icon(Icons.plus_one)),
     );
   }
 }
@@ -233,7 +257,7 @@ class RadioGroupWidget extends State {
               controller: weightController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                hintText: 'pounds'
+                hintText: ' Pounds'
               )
             ),
           ),
