@@ -51,5 +51,5 @@ class foodObject:
         """
         :return: name,cost
         """
-        return self.name + ","+str(self.cost)
+        return self.name + " costs $"+str(self.cost) + ", Sku: " +str(self.sku)
 

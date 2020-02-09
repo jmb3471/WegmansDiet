@@ -11,8 +11,6 @@ from diet.WeeklyValues import *
 from wegmans_api import wm_products
 import json
 from diet.FoodItem import foodObject
-from flask_test_package import makePost
-
 
 
 """
@@ -21,16 +19,47 @@ Main function
 Work in progress ...
 """
 def main():
-    json_file = wm_products.get_product(435178)
-    name = json_file['name']
-    price = wm_products.get_price(391882, 1)
-    price = price['price']
-    nutrition = json_file['nutrients']
-    example = foodObject(name, price, nutrition, 391882)
-    add_item(example, 2)
-    makePost.sendFood({'action': 'remove', 'object': {'sku': '435178'}})
-    #remove_item(example, 1)
-    sendToJson(SHOPPING_LIST)
+	while (True):
+		inp = input("Press r to remove item, a to add item, s to search for an item,"
+					" p to print shopping cart, n for nutritional details: ")
+		if inp == 'r':
+			print(SHOPPING_LIST.toList())
+			inp = input("Which sku would you like to remove:")
+			lst = SHOPPING_LIST.toList()
+			for x in lst:
+				if x == inp:
+					remove_item(SHOPPING_LIST.return_item(x), 1)
+					break
+			print("Item not in cart")
+
+		elif inp == 's':
+			inp = input("Search for an Item: ")
+			products = wm_products.search_products(inp)
+			products = products['results']
+			lst = []
+			for x in products:
+				lst.append(x['name'])
+				lst.append(x['sku'])
+			print(lst)
+		elif inp == 'a':
+
+			inp = input("Pick a SKU: ")
+
+			json_file = wm_products.get_product(inp)
+			name = json_file['name']
+			price = wm_products.get_price(inp, 1)
+			price = price['price']
+			nutrition = json_file['nutrients']
+			example = foodObject(name, price, nutrition, inp)
+			add_item(example, 1)
+		elif inp == 'p':
+			lst = []
+			for x in SHOPPING_LIST.toList():
+				lst.append(SHOPPING_LIST.return_item(x).toString())
+
+			print(lst)
+		elif inp == 'n':
+			SHOPPING_LIST.check_nut()
 
 
 """
