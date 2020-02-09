@@ -11,7 +11,6 @@ class ShoppingList:
         self.sex = sex
         self.time = time
         self.zinc = 0
-        self.potassium = 0
         self.iron = 0
         self.sodium = 0
         self.calcium = 0
@@ -39,9 +38,8 @@ class ShoppingList:
         while (quantity > 0):
             quantity -= 1
 
-            self.items.append(item)
+            self.items.append(item.toString)
             self.zinc += item.get_nut_specific("Zinc")
-            self.potassium += item.get_nut_specific("Potassium")
             self.iron += item.get_nut_specific("Iron")
             self.sodium += item.get_nut_specific("Sodium")
             self.calcium += item.get_nut_specific("Calcium")
@@ -58,7 +56,6 @@ class ShoppingList:
     #checks nutrition information of the shopping cart
     def check_nut(self):
         zinc_amount = ZINC*self.time.value
-        potassium_amount = POTASSIUM*self.time.value
         iron_amount = IRON*self.time.value
         sodium_amount = SODIUM*self.time.value
         calories_amount = CALORIES_FEMALE if self.sex.value else CALORIES_MALE
@@ -82,21 +79,6 @@ class ShoppingList:
                 print("You are over the recommended daily intake of zinc by " +str(zinc_over)+"mg")
         else:
             print("You've gotten enough zinc")
-
-        if self.potassium < (potassium_amount-potassium_amount*0.1):
-            potassium_missing = potassium_amount-self.potassium
-            if self.time == TIME.Week:
-                print("You are missing "+str(potassium_missing)+"mg for a weekly intake of potassium")
-            else:
-                print("You are missing "+str(potassium_missing)+"mg for a daily intake of potassium")
-        elif self.potassium > (potassium_amount+potassium_amount*0.1):
-            potassium_over = self.potassium - potassium_amount
-            if self.time == TIME.Week:
-                print("You are over the recommended weekly intake of potassium by "+str(potassium_over)+"mg")
-            else:
-                print("You are over the recommended daily intake of potassium by "+str(potassium_over)+"mg")
-        else:
-            print("You've gotten enough potassium")
 
         if self.iron < (iron_amount-iron_amount*0.1):
             iron_missing = iron_amount-self.iron

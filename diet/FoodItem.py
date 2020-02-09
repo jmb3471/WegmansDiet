@@ -12,24 +12,26 @@ class foodObject:
             return 0
         for x in self.nutrition_facts:
             if x['type'] == thing:
-                quantity = self.nutrition_facts[1]['quantity']
-                quantity_split = quantity.split(" ")
-                if (len(quantity_split) > 1):
-                    if (quantity_split[1] == 'mg'):
-                        quantity_split[0] = quantity_split[0]/1000
+                quantity = x['quantity']
+
                 if quantity != '' and quantity != 'None':
                     try:
-                        return float(quantity_split[0])
+                        quantity_split = quantity.split(" ")
+                        float_quant = float(quantity_split[0])
+                        if (len(quantity_split) > 1):
+                            if (quantity_split[1] == 'g'):
+                                float_quant = float_quant * 1000
+                        print(quantity_split[0])
+                        return float_quant
                     except:
                         return 0
                 else:
-                    print("wrong")
                     return 0
         else:
             return 0
 
 
     def toString(self):
-        return(self.name + " costs $"+ str(self.cost) + " ")
+        return self.name + " costs $"+ str(self.cost) + " "
 
 
