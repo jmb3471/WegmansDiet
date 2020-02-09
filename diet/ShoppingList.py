@@ -65,8 +65,12 @@ class ShoppingList:
         self.check_nut()
 
 
-    #checks nutrition information of the shopping cart
+
     def check_nut(self):
+        """
+        Checks the current nutritional value of the shopping cart
+        :return:
+        """
         zinc_amount = ZINC*self.time.value
         iron_amount = IRON*self.time.value
         sodium_amount = SODIUM*self.time.value
@@ -77,12 +81,19 @@ class ShoppingList:
         dietary_fiber_amount = DIETARY_FIBER*self.time.value
         cholesteral_amount = CHOLESTEROL*self.time.value
         calcium_amount = CALCIUM*self.time.value
+
+        #check to see if the zinc in the shopping cart is less than
+        #the recommended zinc amount with a tolerance of 10%
         if self.zinc < (zinc_amount-zinc_amount*0.1):
+            #zinc needed to match the recommended amount
             zinc_missing = zinc_amount-self.zinc
+            #to check if it's for weekly or daily
             if self.time == TIME.Week:
                 print("You are missing "+str(zinc_missing)+"mg for a weekly intake of zinc")
             else:
                 print("You are missing "+str(zinc_missing)+"mg for today's intake of zinc")
+        #check to see if the zinc in the shopping cart is greater than
+        #the recommended zinc amount with a tolerance of 10%
         elif self.zinc > (zinc_amount+zinc_amount*0.1):
             zinc_over = self.zinc - zinc_amount
             if self.time == TIME.Week:
@@ -91,6 +102,8 @@ class ShoppingList:
                 print("You are over the recommended daily intake of zinc by " +str(zinc_over)+"mg")
         else:
             print("You've gotten enough zinc")
+
+        #this pattern repeats for every following type of nutrient
 
         if self.iron < (iron_amount-iron_amount*0.1):
             iron_missing = iron_amount-self.iron
