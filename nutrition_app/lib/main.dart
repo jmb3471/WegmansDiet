@@ -109,16 +109,13 @@ class ShoppingListItem extends State<ShoppingList>{
               keyboardType: TextInputType.text,
               decoration: InputDecoration(hintText: 'Search'),
               ),
-            ),
+            ), floatingActionButton: FloatingActionButton(onPressed: () {
+              search = searchCon.text;
+              searchCon.clear();
+            }),
           );
         })
     );
-    search = searchCon.text;
-    setState(() {
-      _items.add(search);
-    });
-    searchCon.clear();
-    print(search);
   }
   
   @override
