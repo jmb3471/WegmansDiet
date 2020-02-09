@@ -1,5 +1,7 @@
 from flask import *
-
+from wegmans_api import wm_products
+from diet.FoodItem import foodObject
+from diet.ShoppingList import *
 app = Flask(__name__)
 
 @app.route('/processjson',methods=['POST'])
@@ -17,13 +19,34 @@ def sendDataToFront():
     #however they decide to handle receiving data
     return jsonify(data)
 
-@app.rout('/sendDataToBack',methods=['POST'])
+@app.route('/sendDataToBack',methods=['POST'])
 def sendDatatoBack():
     data=request.get_json()
     type = data['action']
     if type == 'remove':
-        foodObject = data['object']
-
+        foodObjectThing = data['object']
+        sku = foodObjectThing['sku']
+        actualObject = wm_products.get_product(sku)
+        name = actualObject['name']
+        nutrients = actualObject['nutrients']
+        price = wm_products.get_price(435178, 1)
+        price = price['price']
+        foodObjectThing = foodObject(name,price,nutrients,sku)
+        remove_item(foodObjectThing,1)
+        print('We Gucci if this appears')
+        return jsonify(data['object'])
+    else:
+        foodObjectThing = data['object']
+        sku = foodObjectThing['sku']
+        actualObject = wm_products.get_product(sku)
+        name = actualObject['name']
+        nutrients = actualObject['nutrients']
+        price = wm_products.get_price(435178, 1)
+        price = price['price']
+        foodObjectThing = foodObject(name,price,nutrients,sku)
+        add_item(foodObjectThing,1)
+        print('We Gucci if this appears')
+        return jsonify(data['object'])
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()

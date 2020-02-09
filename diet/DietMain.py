@@ -11,6 +11,7 @@ from diet.WeeklyValues import *
 from wegmans_api import wm_products
 import json
 from diet.FoodItem import foodObject
+from flask_test_package import makePost
 
 
 
@@ -20,17 +21,16 @@ Main function
 Work in progress ...
 """
 def main():
-	json_file = wm_products.get_product(435178)
-	name = json_file['name']
-	price = wm_products.get_price(391882, 1)
-	price = price['price']
-	nutrition = json_file['nutrients']
-	example = foodObject(name, price, nutrition, 391882)
-	add_item(example, 2)
-
-	remove_item(example, 1)
-
-	sendToJson(SHOPPING_LIST)
+    json_file = wm_products.get_product(435178)
+    name = json_file['name']
+    price = wm_products.get_price(391882, 1)
+    price = price['price']
+    nutrition = json_file['nutrients']
+    example = foodObject(name, price, nutrition, 391882)
+    add_item(example, 2)
+    makePost.sendFood({'action': 'remove', 'object': {'sku': '435178'}})
+    #remove_item(example, 1)
+    sendToJson(SHOPPING_LIST)
 
 
 """
