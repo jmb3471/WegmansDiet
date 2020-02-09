@@ -1,10 +1,11 @@
 from flask import *
-from wegmans_api import wm_products
+from wegmans_api.wm_products import *
 from diet.FoodItem import foodObject
 from diet.ShoppingList import *
 from diet.parseSearch import *
 app = Flask(__name__)
 
+#test
 @app.route('/processjson',methods=['POST'])
 def processjson():
     data = request.get_json()
