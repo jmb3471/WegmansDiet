@@ -32,6 +32,5 @@ class foodObject:
 
 
     def toString(self):
-        return self.name + " costs $"+ str(self.cost) + " "
-
+        return self.name + ","+str(self.cost)
 

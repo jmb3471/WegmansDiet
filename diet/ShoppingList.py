@@ -38,7 +38,7 @@ class ShoppingList:
         while (quantity > 0):
             quantity -= 1
 
-            self.items.append(item.toString)
+            self.items.append(item.toString())
             self.zinc += item.get_nut_specific("Zinc")
             self.iron += item.get_nut_specific("Iron")
             self.sodium += item.get_nut_specific("Sodium")
