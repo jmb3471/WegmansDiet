@@ -36,9 +36,14 @@ class ShoppingList:
     def toList(self):
         lst = []
         for x in self.items:
-            lst.append(x.toString())
+            lst.append(x.sku)
 
         return lst
+
+    def return_item(self, sku):
+        for x in self.items:
+            if x.sku == sku:
+                return x
 
     def check_nut(self):
         """
@@ -255,7 +260,6 @@ def add_item(item, quantity):
         SHOPPING_LIST.dietary_fiber += item.get_nut_specific("Dietary Fiber")
         SHOPPING_LIST.cholesterol += item.get_nut_specific("Cholesterol")
 
-    SHOPPING_LIST.check_nut()
 
 
 """
@@ -282,13 +286,13 @@ def remove_item(item, quantity):
             if item.sku == itemx.sku or item.name == itemx.name:
                 SHOPPING_LIST.items.remove(itemx)
 
-    SHOPPING_LIST.check_nut()
 
 def send_suggestion(values, vitamin):
-    data = {}
-    data['Action'] = "Suggestion"
-    data['type'] = vitamin
-    data['list'] = values
+    #change later
+    string = ""
+    for x in values:
+        product = wm_products.get_product(x)
+        name = product['name']
+        string += name + ": SKU" + str(x) + ", "
+    print(string, "suggested for low " + vitamin)
 
-    with open('data.json', 'w') as outfile:
-        json.dump(data, outfile)
