@@ -1,7 +1,7 @@
 """
 File: DietMain.py
 @authors: Jonathan Baxley, Ezequiel Salas
-This file takes a json file as input and returns a json file to the server/app
+This file takes a json_file file as input and returns a json_file file to the server/app
 """
 
 
@@ -9,10 +9,12 @@ from ShoppingList import *
 from FoodItem import *
 from WeeklyValues import *
 from wegmans_api import wm_products
-import json
+import json_file
 from diet.FoodItem import foodObject
 from diet.ShoppingList import ShoppingList
 
+
+SHOPPING_LIST = ShoppingList(SEX.Male, TIME.Day)
 
 """
 Main function
@@ -22,21 +24,19 @@ Work in progress ...
 def main():
 	shopping_list = ShoppingList(SEX.Male, TIME.Day)
 	json_file = wm_products.get_product(435178)
-	print(json_file)
 	name = json_file['name']
 	price = wm_products.get_price(391882, 1)
 	price = price['price']
 	nutrition = json_file['nutrients']
-	print(nutrition)
 
-	example = foodObject(name, price, nutrition)
+	example = foodObject(name, price, nutrition, 391882)
 	shopping_list.add_item(example, 2)
 
 	sendToJson(shopping_list)
 
 
 """
-Sends the shopping list information to a json file
+Sends the shopping list information to a json_file file
 @author: Jonathan Baxley
 @:param takes a shopping list as input
 """
@@ -63,8 +63,8 @@ def sendToJson(shopping_list):
 
 	})
 
-	with open('data.json', 'w') as outfile:
-		json.dump(data, outfile)
+	with open('data.json_file', 'w') as outfile:
+		json_file.dump(data, outfile)
 
 
 if __name__ == '__main__':

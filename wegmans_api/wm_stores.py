@@ -7,7 +7,7 @@ author: Dhaval Shrishrimal
 
 #external packages
 import requests
-import json
+import json_file
 
 #import authorization key from auth.py, hidden from git
 from auth import API_KEY
