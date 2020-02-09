@@ -1,3 +1,10 @@
+"""
+File: DietMain.py
+@authors: Jonathan Baxley, Ezequiel Salas
+This file takes a json file as input and returns a json file to the server/app
+"""
+
+
 from ShoppingList import *
 from FoodItem import *
 from WeeklyValues import *
@@ -6,11 +13,14 @@ import json
 from diet.FoodItem import foodObject
 from diet.ShoppingList import ShoppingList
 
+
+"""
+Main function
+@author: Jonathan Baxley, Ezequiel Salas
+Work in progress ...
+"""
 def main():
-	#store = wm_stores.get_stores()
-	#print(store)
 	shopping_list = ShoppingList(SEX.Male, TIME.Day)
-	#json_file = wm_products.search_products("chobani")
 	json_file = wm_products.get_product(435178)
 	print(json_file)
 	name = json_file['name']
@@ -24,6 +34,12 @@ def main():
 
 	sendToJson(shopping_list)
 
+
+"""
+Sends the shopping list information to a json file
+@author: Jonathan Baxley
+@:param takes a shopping list as input
+"""
 def sendToJson(shopping_list):
 	data = {}
 	data['Nutrients'] = []
