@@ -4,7 +4,7 @@ File: ShoppingList.py
 @authors: Jonathan Baxley, Ezequiel Salas
 """
 from diet.WeeklyValues import *
-from diet.DietMain import *
+
 
 """
 Takes information and sorts dietary info into a shopping list
@@ -32,64 +32,12 @@ class ShoppingList:
     Prints to string version of shopping list
     @author: Jonathan Baxley
     """
-    def toString(self):
-        str = ""
+    def toList(self):
+        lst = []
         for x in self.items:
-            str += x.toString()
+            lst.append(x.toString())
 
-        str += ". "
-        return str
-
-
-    """
-    Adds an item to the shopping cart
-    @:param Item of FoodItem object, 
-    Quantity: int values of how many
-    @author: Jonathan Baxley
-    """
-    @staticmethod
-    def add_item(item, quantity):
-        while quantity > 0:
-            quantity -= 1
-
-            SHOPPING_LIST.items.append(item.toString())
-            SHOPPING_LIST.zinc += item.get_nut_specific("Zinc")
-            SHOPPING_LIST.iron += item.get_nut_specific("Iron")
-            SHOPPING_LIST.sodium += item.get_nut_specific("Sodium")
-            SHOPPING_LIST.calcium += item.get_nut_specific("Calcium")
-            SHOPPING_LIST.calories += item.get_nut_specific("Calories")
-            SHOPPING_LIST.tot_fat += item.get_nut_specific("Total Fat")
-            SHOPPING_LIST.tot_carbs += item.get_nut_specific("Total Carbohydrate")
-            SHOPPING_LIST.protein += item.get_nut_specific("Protein")
-            SHOPPING_LIST.dietary_fiber += item.get_nut_specific("Dietary Fiber")
-            SHOPPING_LIST.cholesterol += item.get_nut_specific("Cholesterol")
-
-        SHOPPING_LIST.check_nut()
-
-    """
-    Removes an item to the shopping cart
-    @:param Item of FoodItem object, 
-    Quantity: int values of how many
-    @author: Jonathan Baxley
-    """
-    @staticmethod
-    def remove_item(item, quantity):
-        while quantity > 0:
-            quantity -= 1
-            SHOPPING_LIST.zinc -= item.get_nut_specific("Zinc")
-            SHOPPING_LIST.iron -= item.get_nut_specific("Iron")
-            SHOPPING_LIST.sodium -= item.get_nut_specific("Sodium")
-            SHOPPING_LIST.calcium -= item.get_nut_specific("Calcium")
-            SHOPPING_LIST.calories -= item.get_nut_specific("Calories")
-            SHOPPING_LIST.tot_fat -= item.get_nut_specific("Total Fat")
-            SHOPPING_LIST.tot_carbs -= item.get_nut_specific("Total Carbohydrate")
-            SHOPPING_LIST.protein -= item.get_nut_specific("Protein")
-            SHOPPING_LIST.dietary_fiber -= item.get_nut_specific("Dietary Fiber")
-            SHOPPING_LIST.cholesterol -= item.get_nut_specific("Cholesterol")
-            SHOPPING_LIST.items.remove(item)
-
-        SHOPPING_LIST.check_nut()
-
+        return lst
 
     def check_nut(self):
         """
@@ -116,7 +64,7 @@ class ShoppingList:
             if self.time == TIME.Week:
                 print("You are missing "+str(zinc_missing)+"mg for a weekly intake of zinc")
             else:
-                print("You are missing "+str(zinc_missing)+"mg for today's intake of zinc")
+                print("You are missing "+str(zinc_missing)+"mg for a daily intake of zinc")
         #check to see if the zinc in the shopping cart is greater than
         #the recommended zinc amount with a tolerance of 10%
         elif self.zinc > (zinc_amount+zinc_amount*0.1):
@@ -180,7 +128,7 @@ class ShoppingList:
             if self.time == TIME.Week:
                 print("You are missing "+str(total_fat_missing)+"mg for a weekly intake of total fats")
             else:
-                print("You are missing"+str(total_fat_missing)+"mg for a daily intake of total fats")
+                print("You are missing "+str(total_fat_missing)+"mg for a daily intake of total fats")
         elif self.tot_fat > (tot_fat_amount+tot_fat_amount*0.1):
             total_fat_over = self.tot_fat - tot_fat_amount
             if self.time == TIME.Week:
@@ -254,14 +202,65 @@ class ShoppingList:
         if self.calcium < (calories_amount-calories_amount*0.1):
             calcium_missing = calcium_amount-self.calcium
             if self.time == TIME.Week:
-                print ("You are missing "+str(calcium_missing)+"mg for a weekly intake of calcium")
+                print ("You are missing "+str(calcium_missing)+" mg for a weekly intake of calcium")
             else:
-                print ("You are missing "+str(calcium_missing)+"mg for a daily intake of calcium")
+                print ("You are missing "+str(calcium_missing)+" mg for a daily intake of calcium")
         elif self.calcium > (calcium_amount+calcium_amount*0.1):
             calcium_over = self.calcium - calcium_amount
             if self.time == TIME.Week:
-                print ("You are over "+str(calcium_over)+"mg for a weekly intake of calcium")
+                print ("You are over "+str(calcium_over)+" mg for a weekly intake of calcium")
             else:
                 print("You are over "+str(calcium_over)+"mg for a daily intake of calcium")
         else:
             print("enough calcium")
+
+
+SHOPPING_LIST = ShoppingList(SEX.Male, TIME.Day)
+
+
+"""
+Adds an item to the shopping cart
+@:param Item of FoodItem object, 
+Quantity: int values of how many
+@author: Jonathan Baxley
+"""
+def add_item(item, quantity):
+    while quantity > 0:
+        quantity -= 1
+        SHOPPING_LIST.items.append(item)
+        SHOPPING_LIST.zinc += item.get_nut_specific("Zinc")
+        SHOPPING_LIST.iron += item.get_nut_specific("Iron")
+        SHOPPING_LIST.sodium += item.get_nut_specific("Sodium")
+        SHOPPING_LIST.calcium += item.get_nut_specific("Calcium")
+        SHOPPING_LIST.calories += item.get_nut_specific("Calories")
+        SHOPPING_LIST.tot_fat += item.get_nut_specific("Total Fat")
+        SHOPPING_LIST.tot_carbs += item.get_nut_specific("Total Carbohydrate")
+        SHOPPING_LIST.protein += item.get_nut_specific("Protein")
+        SHOPPING_LIST.dietary_fiber += item.get_nut_specific("Dietary Fiber")
+        SHOPPING_LIST.cholesterol += item.get_nut_specific("Cholesterol")
+
+    SHOPPING_LIST.check_nut()
+
+
+"""
+Removes an item to the shopping cart
+@:param Item of FoodItem object, 
+Quantity: int values of how many
+@author: Jonathan Baxley
+"""
+def remove_item(item, quantity):
+    while quantity > 0:
+        quantity -= 1
+        SHOPPING_LIST.zinc -= item.get_nut_specific("Zinc")
+        SHOPPING_LIST.iron -= item.get_nut_specific("Iron")
+        SHOPPING_LIST.sodium -= item.get_nut_specific("Sodium")
+        SHOPPING_LIST.calcium -= item.get_nut_specific("Calcium")
+        SHOPPING_LIST.calories -= item.get_nut_specific("Calories")
+        SHOPPING_LIST.tot_fat -= item.get_nut_specific("Total Fat")
+        SHOPPING_LIST.tot_carbs -= item.get_nut_specific("Total Carbohydrate")
+        SHOPPING_LIST.protein -= item.get_nut_specific("Protein")
+        SHOPPING_LIST.dietary_fiber -= item.get_nut_specific("Dietary Fiber")
+        SHOPPING_LIST.cholesterol -= item.get_nut_specific("Cholesterol")
+        SHOPPING_LIST.items.remove(item)
+
+    SHOPPING_LIST.check_nut()

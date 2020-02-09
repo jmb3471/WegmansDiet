@@ -7,7 +7,7 @@ to keep track of information for any food item.
 
 
 class foodObject:
-    def __init__(self,name,cost,nutrition_facts):
+    def __init__(self,name,cost,nutrition_facts, sku):
         self.name = name
         #price per unit or pound.
         self.cost = cost
@@ -38,7 +38,6 @@ class foodObject:
                             if (quantity_split[1] == 'g'):
                                 #convert to miligrams
                                 float_quant = float_quant * 1000
-                        print(quantity_split[0])
                         return float_quant
                     except:
                         return 0

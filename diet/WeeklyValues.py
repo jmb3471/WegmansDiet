@@ -5,6 +5,8 @@ File: WeeklyValues.py
 """
 import enum
 
+
+
 #Vitamins in milligrams
 ZINC = 15.00 * 7.00
 POTASSIUM = 3500.00 * 7.00

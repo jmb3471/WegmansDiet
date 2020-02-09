@@ -5,16 +5,14 @@ This file takes a json_file file as input and returns a json_file file to the se
 """
 
 
-from ShoppingList import *
-from FoodItem import *
-from WeeklyValues import *
+from diet.FoodItem import *
+from diet.ShoppingList import *
+from diet.WeeklyValues import *
 from wegmans_api import wm_products
-import json_file
+import json
 from diet.FoodItem import foodObject
-from diet.ShoppingList import ShoppingList
 
 
-SHOPPING_LIST = ShoppingList(SEX.Male, TIME.Day)
 
 """
 Main function
@@ -22,17 +20,17 @@ Main function
 Work in progress ...
 """
 def main():
-	shopping_list = ShoppingList(SEX.Male, TIME.Day)
 	json_file = wm_products.get_product(435178)
 	name = json_file['name']
 	price = wm_products.get_price(391882, 1)
 	price = price['price']
 	nutrition = json_file['nutrients']
-
 	example = foodObject(name, price, nutrition, 391882)
-	shopping_list.add_item(example, 2)
+	add_item(example, 2)
 
-	sendToJson(shopping_list)
+	remove_item(example, 1)
+
+	sendToJson(SHOPPING_LIST)
 
 
 """
@@ -59,12 +57,12 @@ def sendToJson(shopping_list):
 	data['Info'].append({
 		'Sex': shopping_list.sex.value,
 		'Time': shopping_list.time.value,
-		'Items': shopping_list.items
+		'Items': shopping_list.toList()
 
 	})
 
-	with open('data.json_file', 'w') as outfile:
-		json_file.dump(data, outfile)
+	with open('data.json', 'w') as outfile:
+		json.dump(data, outfile)
 
 
 if __name__ == '__main__':
