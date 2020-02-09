@@ -67,6 +67,7 @@ class ShoppingList:
         protein_amount = PROTEIN*self.time.value
         dietary_fiber_amount = DIETARY_FIBER*self.time.value
         cholesteral_amount = CHOLESTEROL*self.time.value
+        calcium_amount = CALCIUM*self.time.value
         if self.zinc < (zinc_amount-zinc_amount*0.1):
             zinc_missing = zinc_amount-self.zinc
             if self.time == TIME.Week:
@@ -74,7 +75,7 @@ class ShoppingList:
             else:
                 print("You are missing "+str(zinc_missing)+"mg for today's intake of zinc")
         elif self.zinc > (zinc_amount+zinc_amount*0.1):
-            zinc_over = self.zinc - zinc_amount+zinc_amount*0.1
+            zinc_over = self.zinc - zinc_amount
             if self.time == TIME.Week:
                 print("You are over the recommended weekly intake of zinc by "+str(zinc_over)+"mg")
             else:
@@ -89,7 +90,7 @@ class ShoppingList:
             else:
                 print("You are missing "+str(potassium_missing)+"mg for a daily intake of potassium")
         elif self.potassium > (potassium_amount+potassium_amount*0.1):
-            potassium_over = self.potassium - potassium_amount+potassium_amount*0.1
+            potassium_over = self.potassium - potassium_amount
             if self.time == TIME.Week:
                 print("You are over the recommended weekly intake of potassium by "+str(potassium_over)+"mg")
             else:
@@ -104,7 +105,7 @@ class ShoppingList:
             else:
                 print("You are missing "+str(iron_missing)+"mg for a daily intake of iron")
         elif self.iron > (iron_amount+iron_amount*0.1):
-            iron_over = self.iron - iron_amount+iron_amount*0.1
+            iron_over = self.iron - iron_amount
             if self.time == TIME.Week:
                 print("You are over the recommended weekly intake of iron by "+str(iron_over)+"mg")
             else:
@@ -120,7 +121,7 @@ class ShoppingList:
             else:
                 print("You are missing "+str(sodium_missing)+"mg for a daily intake of sodium")
         elif self.sodium > (sodium_amount-sodium_amount*0.1):
-            sodium_over = self.sodium - sodium_amount+sodium_amount*0.1
+            sodium_over = self.sodium - sodium_amount
             if self.time == TIME.Week:
                 print("You are over the recommended weekly intake of sodium by "+str(sodium_over)+"mg")
             else:
@@ -134,7 +135,7 @@ class ShoppingList:
             else:
                 print("You are missing "+str(calories_missing)+" calories for a daily intake")
         elif self.calories > (calories_amount+calories_amount*0.1):
-            calories_over = self.calories - calories_amount+calories_amount*0.1
+            calories_over = self.calories - calories_amount
             if self.time == TIME.Week:
                 print("You are over "+str(calories_over)+" calories for a weekly intake")
             else:
@@ -145,34 +146,90 @@ class ShoppingList:
         if self.tot_fat < (tot_fat_amount-tot_fat_amount*0.1):
             total_fat_missing = tot_fat_amount-self.tot_fat
             if self.time == TIME.Week:
-                print("You are missing "+str(total_fat_missing)+"g for a weekly intake of total fats")
+                print("You are missing "+str(total_fat_missing)+"mg for a weekly intake of total fats")
             else:
-                print("You are missing"+str(total_fat_missing)+"g for a daily intake of total fats")
+                print("You are missing"+str(total_fat_missing)+"mg for a daily intake of total fats")
         elif self.tot_fat > (tot_fat_amount+tot_fat_amount*0.1):
-            total_fat_over = self.tot_fat - tot_fat_amount+tot_fat_amount*0.1
+            total_fat_over = self.tot_fat - tot_fat_amount
             if self.time == TIME.Week:
-                print("You are over "+str(total_fat_over)+"g for a weekly intake of total fats")
+                print("You are over "+str(total_fat_over)+"mg for a weekly intake of total fats")
             else:
-                print("You are over "+str(total_fat_over)+"g for a daily intake of total fats")
+                print("You are over "+str(total_fat_over)+"mg for a daily intake of total fats")
         else:
-            print("You've gotten enough fat")
-        if self.tot_carbs < (TOT_CARBS*self.time.value):
-            print("Not enough carbs for the week")
+            print("You've gotten enough total fat")
+        if self.tot_carbs < (tot_carb_amount-tot_carb_amount*0.1):
+            total_carb_missing = tot_carb_amount-self.tot_carbs
+            if self.time == TIME.Week:
+                print("You are missing "+str(total_carb_missing)+"mg for a weekly intake of total carbs")
+            else:
+                print("You are missing "+str(total_carb_missing)+"mg for a daily intake of total carbs")
+        elif self.tot_carbs > (tot_carb_amount+tot_carb_amount*0.1):
+            total_carb_over = self.tot_carbs -tot_carb_amount
+            if self.time == TIME.Week:
+                print("You are over "+str(total_carb_over)+"mg for a weekly intake of total carbs")
+            else:
+                print("You are over "+str(total_carb_over)+"mg for a daily intake of total carbs")
         else:
             print("You've gotten enough carbs")
-        if self.protein < (PROTEIN*self.time.value):
-            print("Not enough protein for the week")
+
+
+        if self.protein < (protein_amount-protein_amount*0.1):
+            protein_missing = protein_amount-self.protein
+            if self.time == TIME.Week:
+                print("You are missing "+str(protein_missing)+"mg for a weekly intake of protein")
+            else:
+                print("You are missing "+str(protein_missing)+"mg for a daily intake of protein")
+        elif self.protein > (protein_amount+protein_amount*0.1):
+            protein_over = self.protein-protein_amount
+            if self.time == TIME.Week:
+                print("You are over "+str(protein_over)+"mg for a weekly intake of protein")
+            else:
+                print("You are over "+str(protein_over)+"mg for a daily intake of protein")
         else:
             print("You've gotten enough protein")
-        if self.dietary_fiber < (DIETARY_FIBER*self.time.value):
-            print("Not enough fiber for the week")
+
+        if self.dietary_fiber < (dietary_fiber_amount-dietary_fiber_amount*0.1):
+            dietary_fiber_missing = dietary_fiber_amount-self.dietary_fiber
+            if self.time == TIME.Week:
+                print("You are missing "+str(dietary_fiber_missing)+"mg for a weekly intake of dietary fiber")
+            else:
+                print("You are missing "+str(dietary_fiber_missing)+"mg for a daily intake of dietary fiber")
+        elif self.dietary_fiber > (dietary_fiber_amount+dietary_fiber_amount*0.1):
+            dietary_fiber_over = self.dietary_fiber-dietary_fiber_amount
+            if self.time == TIME.Week:
+                print("You are over "+str(dietary_fiber_over)+"mg for a weekly intake of dietary fiber")
+            else:
+                print("You are over "+str(dietary_fiber_over)+"mg for a daily intake of dietary fiber")
         else:
             print("You've gotten enough fiber")
-        if self.cholesterol < (CHOLESTEROL*self.time.value):
-            print("Not enough cholesterol for the week")
+
+
+        if self.cholesterol < (cholesteral_amount-cholesteral_amount*0.1):
+            cholesteral_missing = cholesteral_amount-self.cholesterol
+            if self.time == TIME.Week:
+                print("You are missing "+str(cholesteral_missing)+"mg for a weekly intake of cholesteral")
+            else:
+                print("You are missing "+str(cholesteral_missing)+"mg for a daily intake of cholesteral")
+        elif self.cholesterol > (cholesteral_amount+cholesteral_amount*0.1):
+            cholesteral_over = self.cholesterol-cholesteral_amount
+            if self.time == TIME.Week:
+                print("You are over "+str(cholesteral_over)+"mg for weekly intake of cholesteral")
+            else:
+                print("You are over "+str(cholesteral_over)+"mg for a daily intake of cholesteral")
         else:
             print("You've gotten enough cholesterol")
-        if self.calcium < CALCIUM*self.time.value:
-            print("Not enough calcium")
+
+        if self.calcium < (calories_amount-calories_amount*0.1):
+            calcium_missing = calcium_amount-self.calcium
+            if self.time == TIME.Week:
+                print ("You are missing "+str(calcium_missing)+"mg for a weekly intake of calcium")
+            else:
+                print ("You are missing "+str(calcium_missing)+"mg for a daily intake of calcium")
+        elif self.calcium > (calcium_amount+calcium_amount*0.1):
+            calcium_over = self.calcium - calcium_amount
+            if self.time == TIME.Week:
+                print ("You are over "+str(calcium_over)+"mg for a weekly intake of calcium")
+            else:
+                print("You are over "+str(calcium_over)+"mg for a daily intake of calcium")
         else:
             print("enough calcium")
