@@ -359,3 +359,13 @@ setHumanSex(String string) async {
   SharedPreferences pref = await SharedPreferences.getInstance();
   await pref.setString("sex", string);
 }
+
+_makePostRequest() async {
+  // set up POST request arguments
+  String url = 'http://127.0.0.1:5000';
+  Map<String, String> headers = {"Content-type": "application/json"};
+  String json = '{"title": "Hello", "body": "body text", "userId": 1}';
+  // make POST request
+  Response response = await post(url, headers: headers, body: json);
+  // check the status code for the result
+  int statusCode = response.statusCode;

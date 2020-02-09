@@ -7,12 +7,13 @@ to keep track of information for any food item.
 
 
 class foodObject:
-    def __init__(self,name,cost,nutrition_facts):
+    def __init__(self,name,cost,nutrition_facts, sku):
         self.name = name
         #price per unit or pound.
         self.cost = cost
         #nutrition facts are a key:value pair, with string:value
         self.nutrition_facts = nutrition_facts
+        self.sku = sku
 
     def get_nut_specific(self, thing):
         """
@@ -38,7 +39,6 @@ class foodObject:
                             if (quantity_split[1] == 'g'):
                                 #convert to miligrams
                                 float_quant = float_quant * 1000
-                        print(quantity_split[0])
                         return float_quant
                     except:
                         return 0
@@ -46,7 +46,6 @@ class foodObject:
                     return 0
         else:
             return 0
-
 
     def toString(self):
         """
