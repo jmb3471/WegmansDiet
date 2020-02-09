@@ -1,11 +1,15 @@
 """
 Parses JSON FILE To add to each object that comes in to a shopping list object
 File: ShoppingList.py
-@authors: Jonathan Baxley
+@authors: Jonathan Baxley, Ezequiel Salas
 """
 from diet.WeeklyValues import *
 
-
+"""
+Takes information and sorts dietary info into a shopping list
+Default Constructor: takes sex and time as input, both enums in WeeklyValues.py
+@author: Jonathan Baxley
+"""
 class ShoppingList:
     def __init__(self, sex,time):
         self.sex = sex
@@ -23,7 +27,10 @@ class ShoppingList:
         self.items = []
 
 
-    #Prints string list of items s
+    """
+    Prints to string version of shopping list
+    @author: Jonathan Baxley
+    """
     def toString(self):
         str = ""
         for x in self.items:
@@ -33,7 +40,12 @@ class ShoppingList:
         return str
 
 
-    #adds an item to the shopping list and all of its nutritional values
+    """
+    Adds an item to the shopping cart
+    @:param Item of FoodItem object, 
+    Quantity: int values of how many
+    @author: Jonathan Baxley
+    """
     def add_item(self, item, quantity):
         while (quantity > 0):
             quantity -= 1
