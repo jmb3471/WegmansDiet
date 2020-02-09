@@ -277,7 +277,10 @@ def remove_item(item, quantity):
         SHOPPING_LIST.protein -= item.get_nut_specific("Protein")
         SHOPPING_LIST.dietary_fiber -= item.get_nut_specific("Dietary Fiber")
         SHOPPING_LIST.cholesterol -= item.get_nut_specific("Cholesterol")
-        SHOPPING_LIST.items.remove(item)
+        #SHOPPING_LIST.items.remove(item)
+        for itemx in SHOPPING_LIST.items:
+            if item.sku == itemx.sku or item.name == itemx.name:
+                SHOPPING_LIST.items.remove(itemx)
 
     SHOPPING_LIST.check_nut()
 

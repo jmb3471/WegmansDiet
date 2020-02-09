@@ -13,6 +13,7 @@ class foodObject:
         self.cost = cost
         #nutrition facts are a key:value pair, with string:value
         self.nutrition_facts = nutrition_facts
+        self.sku = sku
 
     def get_nut_specific(self, thing):
         """
