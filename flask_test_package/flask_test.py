@@ -2,6 +2,7 @@ from flask import *
 from wegmans_api import wm_products
 from diet.FoodItem import foodObject
 from diet.ShoppingList import *
+from diet.parseSearch import *
 app = Flask(__name__)
 
 @app.route('/processjson',methods=['POST'])
@@ -50,7 +51,9 @@ def sendDatatoBack():
     elif type == 'search':
         name = data['name']
         jsonfile = wm_products.search_products(name)
-        return jsonfile
+        results = jsonfile['results']
+        results = parse(results)
+        return jsonify(results)
 
 if __name__ == '__main__':
     app.run()
