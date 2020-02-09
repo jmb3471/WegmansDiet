@@ -1,15 +1,22 @@
-from wegmans_api.wm_products import get_product,get_price
+from wegmans_api import wm_products
 from diet.FoodItem import foodObject
 def parse(list):
-    new_dict =[]
+    new_dict ={}
     for dict in list:
         sku = dict['sku']
-        product_json = get_product(sku)
-        name = product_json['name']
-        price = get_price(sku,3)
-        price = price['price']
-        nutrition = product_json['nutrients']
-        food = foodObject(name,price,nutrition,sku)
-        new_dict.append(food)
+        #print(sku)
+        try:
+            product_json = wm_products.get_product(sku)
+            name = product_json['name']
+            price = wm_products.get_price(sku,3)
+            price = price['price']
+            nutrition = product_json['nutrients']
+            food = foodObject(name,0,nutrition,sku)
+            new_dict[name]={
+                "name":name,
+                'sku':sku
+            }
+        except (Exception):
+            print(sku)
     return new_dict
 

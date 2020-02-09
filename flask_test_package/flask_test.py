@@ -30,9 +30,9 @@ def sendDatatoBack():
         actualObject = wm_products.get_product(sku)
         name = actualObject['name']
         nutrients = actualObject['nutrients']
-        price = wm_products.get_price(435178, 1)
+        price = wm_products.get_price(sku, 1)
         price = price['price']
-        foodObjectThing = foodObject(name,price,nutrients,sku)
+        foodObjectThing = foodObject(name,0,nutrients,sku)
         remove_item(foodObjectThing,1)
         print('We Gucci if this appears')
         return jsonify(data['object'])
@@ -42,9 +42,9 @@ def sendDatatoBack():
         actualObject = wm_products.get_product(sku)
         name = actualObject['name']
         nutrients = actualObject['nutrients']
-        price = wm_products.get_price(435178, 1)
+        price = wm_products.get_price(sku, 1)
         price = price['price']
-        foodObjectThing = foodObject(name,price,nutrients,sku)
+        foodObjectThing = foodObject(name,0,nutrients,sku)
         add_item(foodObjectThing,1)
         print('We Gucci if this appears')
         return jsonify(data['object'])
