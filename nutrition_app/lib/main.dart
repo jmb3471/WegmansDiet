@@ -267,7 +267,7 @@ class RadioGroupWidget extends State {
   }
 }
 
-/**
+/*
  * SUPPORTING FUNCTIONS
  * BELOW THIS COMMENT
  */
@@ -327,7 +327,7 @@ setLoginValue() async {
 //Set a human's weight
 setHumanWeight(double weight) async {
   SharedPreferences pref = await SharedPreferences.getInstance();
-  await pref.setDouble("wieght", weight);
+  await pref.setDouble("weight", weight);
 }
 
 //Set a human's sex
